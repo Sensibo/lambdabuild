@@ -14,10 +14,11 @@ from lambdabuild import untar
 from lambdabuild import collectsources
 
 parser = argparse.ArgumentParser()
-parser.add_argument("--runtime", default="3.9")
+parser.add_argument("--runtime", default="3.13")
 parser.add_argument(
     "--base-docker",
     choices=[
+        "public.ecr.aws/sam/build-python3.13",
         "lambci/lambda:build-python3.9",
         "lambci/lambda:build-python3.8",
         "lambci/lambda:build-python3.7",

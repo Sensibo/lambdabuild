@@ -11,6 +11,7 @@ PYTHON36_HEADER = b"\x33\x0d\x0d\x0a"
 PYTHON37_HEADER = b"\x42\x0d\x0d\x0a"
 PYTHON38_HEADER = b"\x55\x0d\x0d\x0a"
 PYTHON39_HEADER = b"\x61\x0d\x0d\x0a"
+PYTHON313_HEADER = b"\xf3\x0d\x0d\x0a"
 PYTHON27_HEADER = b"\x03\xf3\x0d\x0a"
 
 
@@ -26,11 +27,11 @@ def createzip(zipfile_path):
             context['lastName'] = name
             if name.endswith(".pyc"):
                 assert len(PYC_UNIX_TIMESTAMP) == 4
-                if contents.startswith(PYTHON37_HEADER) or contents.startswith(PYTHON38_HEADER) or contents.startswith(PYTHON39_HEADER):
+                if contents.startswith(PYTHON37_HEADER) or contents.startswith(PYTHON38_HEADER) or contents.startswith(PYTHON39_HEADER) or contents.startswith(PYTHON313_HEADER):
                     contents = contents[:8] + PYC_UNIX_TIMESTAMP + contents[12:]
                 else:
                     assert contents.startswith(PYTHON27_HEADER) or contents.startswith(PYTHON36_HEADER), \
-                            "Unrecognized pyc header, are you using python 2.7, 3.6 or 3.7? %s" % contents[:4]
+                            "Unrecognized pyc header, are you using python 2.7, 3.6, 3.7, 3.8, 3.9 or 3.13? %s" % contents[:4]
                     contents = contents[:4] + PYC_UNIX_TIMESTAMP + contents[8:]
             info = zipfile.ZipInfo(filename=name, date_time=(1980, 1, 1, 0, 0, 0))
             info.external_attr |= (0x1a4 << 16)

@@ -24,9 +24,15 @@ RUNTIMES = {
         two_or_three="3",
         three="3",
     ),
+    '3.13': dict(
+        base_image="public.ecr.aws/sam/build-python3.13",
+        two_or_three="3",
+        three="3",
+    ),
 }
 
 BASE_IMAGES = [
+    "public.ecr.aws/sam/build-python3.13",
     "public.ecr.aws/sam/build-python3.9",
     "lambci/lambda:build-python3.8",
     "lambci/lambda:build-python3.7",
