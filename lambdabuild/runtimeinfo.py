@@ -24,6 +24,11 @@ RUNTIMES = {
         two_or_three="3",
         three="3",
     ),
+    '3.11': dict(
+        base_image="public.ecr.aws/sam/build-python3.11",
+        two_or_three="3",
+        three="3",
+    ),
     '3.13': dict(
         base_image="public.ecr.aws/sam/build-python3.13",
         two_or_three="3",

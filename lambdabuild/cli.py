@@ -19,6 +19,7 @@ parser.add_argument(
     "--base-docker",
     choices=[
         "public.ecr.aws/sam/build-python3.13",
+        "public.ecr.aws/sam/build-python3.11",
         "lambci/lambda:build-python3.9",
         "lambci/lambda:build-python3.8",
         "lambci/lambda:build-python3.7",
