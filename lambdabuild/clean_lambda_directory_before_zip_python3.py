@@ -94,6 +94,12 @@ for root, dirs, files in os.walk(args.dir):
             if args.sourceless:
                 if full_path not in never_delete:
                     os.unlink(full_path)
+            else:
+                # When keeping sources, remove any existing .pyc files
+                pyc_path = full_path + "c"
+                if os.path.exists(pyc_path):
+                    os.unlink(pyc_path)
+
 if args.sourceless:
     for root, dirs, unused_files in os.walk(args.dir):
         if '__pycache__' not in dirs:
@@ -105,3 +111,13 @@ if args.sourceless:
             if removeMagic[:-1] not in never_delete:
                 os.rename(filename, os.path.join(root, removeMagic))
         os.rmdir(cache)
+else:
+    # When keeping sources, remove all __pycache__ directories and .pyc files
+    for root, dirs, files in os.walk(args.dir):
+        for filename in files:
+            if filename.endswith(".pyc"):
+                os.unlink(os.path.join(root, filename))
+        for dirname in list(dirs):
+            if dirname == '__pycache__':
+                shutil.rmtree(os.path.join(root, dirname))
+                dirs.remove(dirname)

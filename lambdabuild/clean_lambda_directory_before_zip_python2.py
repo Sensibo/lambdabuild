@@ -87,6 +87,10 @@ for root, dirs, files in os.walk(args.dir):
                     py_compile.compile(full_path)
             if args.sourceless:
                 os.unlink(full_path)
+            else:
+                # When keeping sources, remove any existing .pyc files
+                if os.path.exists(pyc):
+                    os.unlink(pyc)
     for dirname in list(dirs):
         for extension in DIRECTORIES_EXTENSIONS_TO_DELETE:
             if dirname.endswith(extension):
